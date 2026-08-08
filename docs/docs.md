@@ -1,8 +1,4 @@
-Absolutely, Akshay. This one should be the **engineering documentation**, not recruiter-facing README copy. It should explain **what we built, why each component exists, how the pieces communicate, what decisions we made, and how we verified each stage**.
 
-Save this as `docs/docs.md` or, if you want to keep your existing structure simpler, `docs.md` in the project root.
-
-````markdown
 # Monitoring Stack — Technical Documentation
 
 ## 1. Project Overview
