@@ -1,21 +1,51 @@
-# Server Monitoring Stack
+# Server Monitoring & SLO Stack
 
-A containerized monitoring stack for observing Linux server health and performance using Prometheus, Node Exporter, and Grafana.
+A containerized observability project that monitors Linux server health, measures application availability, and implements an SLO-based alerting workflow using Prometheus, Node Exporter, Blackbox Exporter, and Grafana.
 
-The project demonstrates a practical observability workflow: collecting host-level metrics, storing them as time-series data, and exposing them through a Grafana dashboard.
+The project demonstrates a practical DevOps/SRE monitoring pipeline:
+
+- Host-level metrics collection
+- Time-series monitoring with Prometheus
+- HTTP availability monitoring
+- SLO and error-budget calculation
+- Burn-rate alerting
+- Grafana visualization
+- Failure and recovery testing
 
 ## Architecture
 
 ```mermaid
 flowchart LR
     A[Linux Host] --> B[Node Exporter]
-    B -->|Metrics| C[Prometheus]
-    C -->|PromQL| D[Grafana]
-    D --> E[Monitoring Dashboard]
+    B --> C[Prometheus]
+
+    H[Express Health Service] --> X[Blackbox Exporter]
+    X --> C
+
+    C --> D[Grafana]
+    D --> E[Dashboard]
+    C --> F[SLO / Error Budget]
+    F --> G[Burn Rate Alert]
 ```
 
-## Dashboard
+## Screenshots
 
-![Grafana Server Monitoring Dashboard](screenshots/grafna.png)
+### Grafana Dashboard
 
-The Grafana dashboard provides an overview of the Linux host's CPU, memory, disk, network, load, and uptime metrics.
+![Grafana Dashboard](screenshots/grafna.png)
+
+### Alert — Normal
+
+![Normal Alert State](screenshots/normal-stage.png)
+
+### Alert — Pending
+
+![Pending Alert State](screenshots/pending-state.png)
+
+### Alert — Firing
+
+![Firing Alert State](screenshots/firing.png)
+
+### Alert — Recovered
+
+![Recovered Alert State](screenshots/attaining-normcy.png)

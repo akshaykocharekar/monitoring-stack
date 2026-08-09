@@ -1,0 +1,12 @@
+# Node
+node_modules/
+npm-debug.log*
+
+# Environment variables
+.env
+.env.*
+
+# OS
+.DS_Store
+
+noted.md

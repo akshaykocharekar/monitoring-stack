@@ -23,3 +23,19 @@ services:
     restart: unless-stopped
     ports:
       - "3000:3000"
+
+  health-service:
+    build: ./app
+    container_name: health-service
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+
+  blackbox-exporter:
+    image: prom/blackbox-exporter:latest
+    container_name: blackbox-exporter
+    restart: unless-stopped
+    volumes:
+      - "./blackbox/blackbox.yml:/etc/blackbox_exporter/config.yml:ro"
+    command:
+      - "--config.file=/etc/blackbox_exporter/config.yml"
